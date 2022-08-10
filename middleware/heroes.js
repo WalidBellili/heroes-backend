@@ -18,10 +18,18 @@ const verifyHero = (req, res, next) => {
 
 const verifySlug = (req, res, next) => {
   const checkSlug = req.params.slug;
+
+  const findIndex = heroesJson.findIndex((hero) => {
+    return hero.slug === checkSlug;
+  });
+  //   console.log(findIndex);
+
   const isHerosExist = heroesJson.find((hero) => {
     return hero.slug === checkSlug;
   });
   if (isHerosExist) {
+    req.hero = isHerosExist;
+    req.heroIndex = findIndex;
     next();
   } else {
     res.status(404).json("Ce héros n'existe pas");

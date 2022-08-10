@@ -14,7 +14,8 @@ app.get("/:slug", verifySlug, (req, res) => {
 
 // ici on recupere les pouvoir d'un hero
 app.get("/:slug/powers", verifySlug, (req, res) => {
-  res.json(isHerosExist.power);
+  res.json(req.hero.power);
+  // res.json(isHerosExist.power);
 });
 
 // ici on met un nouvelle obj et on verifie les doublons
@@ -31,6 +32,11 @@ app.post("/", verifyHero, (req, res) => {
   res.json(newHero);
 });
 
-// app.put("/heroes/:slug/powers", (req, res) => {});
+// trouver le héros lui ajouter un pouvoir
+app.put("/:slug/powers", verifySlug, (req, res) => {
+  heroesJson[req.heroIndex].power.push(req.body.power);
+  // console.log(req.hero);
+  res.json(heroesJson[req.heroIndex]);
+});
 
 module.exports = app;
