@@ -10,15 +10,27 @@ app.get("/:slug", (req, res) => {
   const slug = heroesJson.find((heroe) => {
     return heroe.slug === req.params.slug;
   });
-  res.send(slug);
+  res.json(slug);
 });
 
 app.get("/:slug/powers", (req, res) => {
   const power = heroesJson.find((heroe) => {
     return heroe.slug === req.params.slug;
   });
-  res.send(power.power);
+  res.json(power.power);
 });
+
+// Fonction qui servira de middleware
+// const notTwiceSameId = () => {
+//   const { name } = req.params;
+//   const heroDouble = heroesJson.find((hero) => hero.name === name);
+
+//   if (heroDouble) {
+//     res.json(heroDouble);
+//   } else {
+//     res.status(409).send("This heroe already exists");
+//   }
+// };
 
 app.post("/", (req, res) => {
   const newHero = {
@@ -29,13 +41,18 @@ app.post("/", (req, res) => {
     isAlive: req.body.isAlive,
     age: req.body.age,
   };
-  console.log(newHero);
-  heroesJson.push(newHero);
-  console.log(heroesJson);
+
+  const sameName = heroesJson.find((hero) => {
+    return hero.name === req.body.name;
+  });
+  if (!sameName) {
+    heroesJson.push(newHero);
+    res.json(newHero);
+  } else {
+    res.status(409).send("This hero already exists");
+  }
 });
 
-app.put("/heroes/:slug/powers", (req, res) => {
-    
-});
+// app.put("/heroes/:slug/powers", (req, res) => {});
 
 module.exports = app;
