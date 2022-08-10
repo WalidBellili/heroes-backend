@@ -1,38 +1,24 @@
 const express = require("express");
 const app = express();
 const heroesJson = require("../heroes.json");
+const { verifyHero, verifySlug } = require("../middleware/heroes");
 
 app.get("/", (req, res) => {
   res.json(heroesJson);
 });
 
-app.get("/:slug", (req, res) => {
-  const slug = heroesJson.find((heroe) => {
-    return heroe.slug === req.params.slug;
-  });
+// on gere l'id dynamique
+app.get("/:slug", verifySlug, (req, res) => {
   res.json(slug);
 });
 
-app.get("/:slug/powers", (req, res) => {
-  const power = heroesJson.find((heroe) => {
-    return heroe.slug === req.params.slug;
-  });
-  res.json(power.power);
+// ici on recupere les pouvoir d'un hero
+app.get("/:slug/powers", verifySlug, (req, res) => {
+  res.json(isHerosExist.power);
 });
 
-// Fonction qui servira de middleware
-// const notTwiceSameId = () => {
-//   const { name } = req.params;
-//   const heroDouble = heroesJson.find((hero) => hero.name === name);
-
-//   if (heroDouble) {
-//     res.json(heroDouble);
-//   } else {
-//     res.status(409).send("This heroe already exists");
-//   }
-// };
-
-app.post("/", (req, res) => {
+// ici on met un nouvelle obj et on verifie les doublons
+app.post("/", verifyHero, (req, res) => {
   const newHero = {
     slug: req.body.slug,
     name: req.body.name,
@@ -41,16 +27,8 @@ app.post("/", (req, res) => {
     isAlive: req.body.isAlive,
     age: req.body.age,
   };
-
-  const sameName = heroesJson.find((hero) => {
-    return hero.name === req.body.name;
-  });
-  if (!sameName) {
-    heroesJson.push(newHero);
-    res.json(newHero);
-  } else {
-    res.status(409).send("This hero already exists");
-  }
+  heroesJson.push(newHero);
+  res.json(newHero);
 });
 
 // app.put("/heroes/:slug/powers", (req, res) => {});
