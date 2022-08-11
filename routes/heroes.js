@@ -39,4 +39,11 @@ app.put("/:slug/powers", verifySlug, (req, res) => {
   res.json(heroesJson[req.heroIndex]);
 });
 
+// Delete un héros
+
+app.delete("/:slug", verifySlug, (req, res) => {
+  heroesJson.splice(1);
+  res.json(heroesJson);
+});
+
 module.exports = app;
