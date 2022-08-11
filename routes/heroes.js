@@ -9,7 +9,7 @@ app.get("/", (req, res) => {
 
 // on gere l'id dynamique
 app.get("/:slug", verifySlug, (req, res) => {
-  res.json(slug);
+  res.json(req.hero.slug);
 });
 
 // ici on recupere les pouvoir d'un hero
@@ -50,7 +50,22 @@ app.delete("/:slug", verifySlug, (req, res) => {
 
 app.delete("/:slug/powers/:power", verifySlug, (req, res) => {
   req.hero.power.splice(req.heroIndex.power, 1);
-  res.json(`${req.hero.power} a bien été éffacé`)
+  res.json(`${req.hero.power} a bien été éffacé`);
+});
+
+// le put qui remplace toutes les valeurs
+
+app.put("/:slug", verifySlug, (req, res) => {
+  const newObjValues = {
+    slug: req.body.slug,
+    name: req.body.name,
+    power: req.body.power,
+    color: req.body.color,
+    isAlive: req.body.isAlive,
+    age: req.body.age,
+  };
+  heroesJson[req.heroIndex] = newObjValues;
+  res.json(newObjValues);
 });
 
 module.exports = app;
