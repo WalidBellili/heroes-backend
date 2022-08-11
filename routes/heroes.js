@@ -42,8 +42,14 @@ app.put("/:slug/powers", verifySlug, (req, res) => {
 // Delete un héros
 
 app.delete("/:slug", verifySlug, (req, res) => {
-  heroesJson.splice(1);
-  res.json(heroesJson);
+  heroesJson.splice(req.heroIndex, 1);
+  res.json(`${req.hero.slug} a bien été éffacé`);
+});
+
+// Delete un power
+
+app.delete("/:slug/powers/:power", verifySlug, (req, res) => {
+  req.hero.power.splice(req.heroIndex.power, 1);
 });
 
 module.exports = app;
