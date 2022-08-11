@@ -1,5 +1,5 @@
 const heroesJson = require("../heroes.json");
-
+const _ = require("lodash");
 // ici on test les doublon du 1er post l29
 const verifyHero = (req, res, next) => {
   const sameName = heroesJson.find((hero) => {
@@ -36,4 +36,25 @@ const verifySlug = (req, res, next) => {
   }
 };
 
-module.exports = { verifyHero: verifyHero, verifySlug: verifySlug };
+const validateHero = (req, res, next) => {
+  //   const stringifiedValues = JSON.stringify(req.hero);
+  //   const stringifyedArrayJson = JSON.stringify(heroesJson);
+
+  const isEqualKeys = Object.keys(req.hero).sort();
+  //   console.log(isEqualKeys);
+  const keysOfJson = Object.keys(req.body).sort();
+  //   console.log(keysOfJson);
+
+  const isEqual = _.isEqual(isEqualKeys, keysOfJson);
+  console.log(isEqual);
+
+  if (isEqual) {
+    next();
+  }
+};
+
+module.exports = {
+  verifyHero: verifyHero,
+  verifySlug: verifySlug,
+  validateHero: validateHero,
+};

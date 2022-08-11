@@ -1,7 +1,12 @@
 const express = require("express");
 const app = express();
 const heroesJson = require("../heroes.json");
-const { verifyHero, verifySlug } = require("../middleware/heroes");
+
+const {
+  verifyHero,
+  verifySlug,
+  validateHero,
+} = require("../middleware/heroes");
 
 app.get("/", (req, res) => {
   res.json(heroesJson);
@@ -19,7 +24,7 @@ app.get("/:slug/powers", verifySlug, (req, res) => {
 });
 
 // ici on met un nouvelle obj et on verifie les doublons
-app.post("/", verifyHero, (req, res) => {
+app.post("/", verifyHero, validateHero, (req, res) => {
   const newHero = {
     slug: req.body.slug,
     name: req.body.name,
@@ -33,7 +38,7 @@ app.post("/", verifyHero, (req, res) => {
 });
 
 // trouver le héros lui ajouter un pouvoir
-app.put("/:slug/powers", verifySlug, (req, res) => {
+app.put("/:slug/powers", verifySlug, validateHero, (req, res) => {
   heroesJson[req.heroIndex].power.push(req.body.power);
   // console.log(req.hero);
   res.json(heroesJson[req.heroIndex]);
@@ -55,7 +60,7 @@ app.delete("/:slug/powers/:power", verifySlug, (req, res) => {
 
 // le put qui remplace toutes les valeurs
 
-app.put("/:slug", verifySlug, (req, res) => {
+app.put("/:slug", verifySlug, validateHero, (req, res) => {
   const newObjValues = {
     slug: req.body.slug,
     name: req.body.name,
@@ -66,6 +71,10 @@ app.put("/:slug", verifySlug, (req, res) => {
   };
   heroesJson[req.heroIndex] = newObjValues;
   res.json(newObjValues);
+
+  // console.log(isEqualKeys);
+  // const diff = difference(heroesJson, isEqualKeys);
+  // console.log(diff);
 });
 
 module.exports = app;
