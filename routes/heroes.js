@@ -50,6 +50,7 @@ app.delete("/:slug", verifySlug, (req, res) => {
 
 app.delete("/:slug/powers/:power", verifySlug, (req, res) => {
   req.hero.power.splice(req.heroIndex.power, 1);
+  res.json(`${req.hero.power} a bien été éffacé`)
 });
 
 module.exports = app;
