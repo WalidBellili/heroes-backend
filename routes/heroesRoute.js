@@ -31,6 +31,13 @@ app.put("/:slug/powers", checkIfExists, (req, res) => {
   heroes[req.heroIndex].power.push(power);
   res.json(heroes[req.heroIndex]);
 });
+app.put("/:slug", checkIfExists, (req, res) => {
+  heroes[req.heroIndex] = {
+    ...req.body,
+    slug: req.body.name.toLowerCase().replaceAll(" ", "-"),
+  };
+  res.json(heroes[req.heroIndex]);
+});
 
 app.delete("/:slug", checkIfExists, (req, res) => {
   heroes.splice(req.heroIndex, 1);
@@ -44,7 +51,12 @@ app.delete("/:slug/powers/:power", checkIfExists, (req, res) => {
   const powerIndex = powerHero.findIndex((p) => {
     return p === power;
   });
-  powerHero.splice(powerIndex, 1);
+
+  if (powerIndex > -1) {
+    powerHero.splice(powerIndex, 1);
+  } else {
+    res.status(404).json("power not found");
+  }
 
   res.json(heroes[req.heroIndex]);
 });
