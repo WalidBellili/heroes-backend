@@ -25,6 +25,13 @@ app.post("/", checkIfOnPostAlreadyExist, (req, res) => {
   res.json(hero);
 });
 
+app.put("/:slug/powers", checkIfExists, (req, res) => {
+  const { power } = req.body;
+
+  heroes[req.heroIndex].power.push(power);
+  res.json(heroes[req.heroIndex]);
+});
+
 app.delete("/:slug", checkIfExists, (req, res) => {
   heroes.slice(req.heroIndex, 1);
   res.status(204).json("hero deleted");
