@@ -9,5 +9,9 @@ app.get("/", (req, res) => {
 app.get("/:slug", checkIfExists, (req, res) => {
   res.json(req.hero);
 });
+app.delete("/:slug", checkIfExists, (req, res) => {
+  heroes.slice(req.heroIndex, 1);
+  res.status(204).json("hero deleted");
+});
 
 module.exports = app;
