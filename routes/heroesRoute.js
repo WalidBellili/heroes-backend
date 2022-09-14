@@ -1,7 +1,10 @@
 const express = require("express");
 const app = express();
 const heroes = require("../heroes.json");
-const { checkIfExists } = require("../middleware/heroes");
+const {
+  checkIfExists,
+  checkIfOnPostAlreadyExist,
+} = require("../middleware/heroes");
 
 app.get("/", (req, res) => {
   res.json(heroes);
@@ -13,7 +16,7 @@ app.get("/:slug/powers", checkIfExists, (req, res) => {
   res.json(req.hero.power);
 });
 
-app.post("/", (req, res) => {
+app.post("/", checkIfOnPostAlreadyExist, (req, res) => {
   const hero = {
     ...req.body,
     slug: req.body.name.toLowerCase().replaceAll(" ", "-"),

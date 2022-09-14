@@ -20,4 +20,18 @@ const checkIfExists = (req, res, next) => {
   }
 };
 
-module.exports = { checkIfExists };
+const checkIfOnPostAlreadyExist = (req, res, next) => {
+  const { name } = req.body;
+
+  const hero = heroes.find((hero) => {
+    return hero.name === name;
+  });
+
+  if (!hero) {
+    next();
+  } else {
+    res.status(409).json("hero already exists");
+  }
+};
+
+module.exports = { checkIfExists, checkIfOnPostAlreadyExist };
