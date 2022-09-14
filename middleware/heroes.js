@@ -36,9 +36,15 @@ const checkIfOnPostAlreadyExist = (req, res, next) => {
 
 const validateHero = (req, res, next) => {
   const modelKeys = Object.keys(heroes[0]);
-  console.log(modelKeys);
-  const keysFrombody = Object.keys(req.body);
-  console.log(keysFrombody);
+  modelKeys.shift();
+  modelKeys.sort();
+  const keysFrombody = Object.keys(req.body).sort();
+
+  if (JSON.stringify(modelKeys) === JSON.stringify(keysFrombody)) {
+    next();
+  } else {
+    res.status(400).json("Bad request");
+  }
 };
 
 module.exports = { checkIfExists, checkIfOnPostAlreadyExist, validateHero };
