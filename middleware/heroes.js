@@ -40,9 +40,11 @@ const validateHero = (req, res, next) => {
   //   const stringifiedValues = JSON.stringify(req.hero);
   //   const stringifyedArrayJson = JSON.stringify(heroesJson);
 
-  const isEqualKeys = Object.keys(req.hero).sort();
+  console.log(req.hero)
+
+  const isEqualKeys = Object.keys(heroesJson[0]);
   //   console.log(isEqualKeys);
-  const keysOfJson = Object.keys(req.body).sort();
+  const keysOfJson = Object.keys(req.body);
   //   console.log(keysOfJson);
 
   const isEqual = _.isEqual(isEqualKeys, keysOfJson);
@@ -50,6 +52,8 @@ const validateHero = (req, res, next) => {
 
   if (isEqual) {
     next();
+  } else {
+    res.status(404).json("Ce héros n'existe pas");
   }
 };
 
