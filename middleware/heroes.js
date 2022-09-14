@@ -34,4 +34,11 @@ const checkIfOnPostAlreadyExist = (req, res, next) => {
   }
 };
 
-module.exports = { checkIfExists, checkIfOnPostAlreadyExist };
+const validateHero = (req, res, next) => {
+  const modelKeys = Object.keys(heroes[0]);
+  console.log(modelKeys);
+  const keysFrombody = Object.keys(req.body);
+  console.log(keysFrombody);
+};
+
+module.exports = { checkIfExists, checkIfOnPostAlreadyExist, validateHero };
