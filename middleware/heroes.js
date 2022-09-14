@@ -13,7 +13,7 @@ const checkIfExists = (req, res, next) => {
 
   if (hero) {
     req.hero = hero;
-    req.heroIndex = heroIndex;
+    // req.heroIndex = heroIndex;
     next();
   } else {
     res.status(404).json("not found");
