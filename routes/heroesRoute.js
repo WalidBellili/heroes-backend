@@ -33,6 +33,7 @@ app.put("/:slug/powers", checkIfExists, (req, res) => {
 });
 app.put("/:slug", checkIfExists, (req, res) => {
   heroes[req.heroIndex] = {
+    ...req.hero,
     ...req.body,
     slug: req.body.name.toLowerCase().replaceAll(" ", "-"),
   };
