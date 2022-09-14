@@ -33,8 +33,20 @@ app.put("/:slug/powers", checkIfExists, (req, res) => {
 });
 
 app.delete("/:slug", checkIfExists, (req, res) => {
-  heroes.slice(req.heroIndex, 1);
+  heroes.splice(req.heroIndex, 1);
   res.status(204).json("hero deleted");
+});
+
+app.delete("/:slug/powers/:power", checkIfExists, (req, res) => {
+  const { power } = req.params;
+
+  const powerHero = heroes[req.heroIndex].power;
+  const powerIndex = powerHero.findIndex((p) => {
+    return p === power;
+  });
+  powerHero.splice(powerIndex, 1);
+
+  res.json(heroes[req.heroIndex]);
 });
 
 module.exports = app;
