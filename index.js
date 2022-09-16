@@ -1,8 +1,12 @@
+require("dotenv").config();
 const express = require("express");
 const app = express();
-const port = 5000;
+const port = process.env.PORT;
 const cors = require("cors");
 const morgan = require("morgan");
+
+console.log(port);
+
 const heroesRoute = require("./routes/heroesRoute");
 
 app.use(morgan("tiny"));
