@@ -10,7 +10,7 @@ console.log(port);
 const heroesRoute = require("./routes/heroesRoute");
 
 app.use(morgan("tiny"));
-app.use(cors("*"));
+app.use(cors(process.env.URL_FRONTEND));
 app.use(express.json());
 
 app.use("/heroes", heroesRoute);
