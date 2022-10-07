@@ -20,7 +20,7 @@ app.get("/:slug/powers", checkIfExists, (req, res) => {
 app.post("/", validateHero, checkIfOnPostAlreadyExist, (req, res) => {
   const hero = {
     ...req.body,
-    slug: req.body.name.toLowerCase().replaceAll(" ", "-"),
+    slug: req.body.name.toLowerCase().replace(/[^\w]/gi, "-"),
   };
   heroes.push(hero);
   res.json(hero);
