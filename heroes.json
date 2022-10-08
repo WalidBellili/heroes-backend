@@ -18,6 +18,69 @@
         "image": "https://www.bdfugue.com/media/catalog/product/cache/1/image/400x/17f82f742ffe127f42dca9de82fb58b1/9/7/9782809465761_1_75.jpg"
     },
     {
+		"slug": "superman",
+        "name": "Superman",
+        "power": ["Flying"],
+        "color": "blue",
+        "isAlive": true,
+        "age": 300,
+        "image": "https://www.journaldugeek.com/content/uploads/2022/04/disney-no-exit-158.jpg"
+    },
+    {
+		"slug": "zidane",
+        "name": "Zidane",
+        "power": ["ALL"],
+        "color": "blue",
+        "isAlive": true,
+        "age": 300,
+        "image": "https://fr.hespress.com/wp-content/uploads/2021/07/maillot.jpg"
+    },
+    {
+		"slug": "buzz",
+        "name": "Buzz",
+        "power": ["Nothing"],
+        "color": "blue",
+        "isAlive": true,
+        "age": 300,
+        "image": "https://static1.srcdn.com/wordpress/wp-content/uploads/2022/06/Buzz-Lightyear-and-Sox-on-Toy-Story-Aisle.jpg"
+    },
+    {
+		"slug": "thor",
+        "name": "Thor",
+        "power": ["electricty", "worthy"],
+        "color": "blue",
+        "isAlive": true,
+        "age": 300,
+        "image": "https://www.bdfugue.com/media/catalog/product/cache/1/image/400x/17f82f742ffe127f42dca9de82fb58b1/9/7/9782809465761_1_75.jpg"
+    },
+    {
+		"slug": "thor",
+        "name": "Thor",
+        "power": ["electricty", "worthy"],
+        "color": "blue",
+        "isAlive": true,
+        "age": 300,
+        "image": "https://www.bdfugue.com/media/catalog/product/cache/1/image/400x/17f82f742ffe127f42dca9de82fb58b1/9/7/9782809465761_1_75.jpg"
+    },
+    {
+		"slug": "thor",
+        "name": "Thor",
+        "power": ["electricty", "worthy"],
+        "color": "blue",
+        "isAlive": true,
+        "age": 300,
+        "image": "https://www.bdfugue.com/media/catalog/product/cache/1/image/400x/17f82f742ffe127f42dca9de82fb58b1/9/7/9782809465761_1_75.jpg"
+    },
+    {
+		"slug": "thor",
+        "name": "Thor",
+        "power": ["electricty", "worthy"],
+        "color": "blue",
+        "isAlive": true,
+        "age": 300,
+        "image": "https://www.bdfugue.com/media/catalog/product/cache/1/image/400x/17f82f742ffe127f42dca9de82fb58b1/9/7/9782809465761_1_75.jpg"
+    },
+    {
 		"slug": "dardevil",
         "name": "Daredevil",
         "power": ["blind"],
